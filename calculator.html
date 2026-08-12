@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개성 만점 계산기</title>
+    <!-- 귀여운 폰트 적용 (Google Fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* 그라데이션 배경 */
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            font-family: 'Gaegu', cursive; /* 적용한 폰트 */
+            margin: 0;
+        }
+        .calculator {
+            background-color: rgba(255, 255, 255, 0.9); /* 반투명 화이트 */
+            padding: 25px;
+            border-radius: 30px; /* 둥근 모서리 */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* 부드러운 그림자 */
+            width: 320px;
+            border: 3px solid #fff; /* 테두리 */
+        }
+        #display {
+            width: 100%;
+            height: 60px;
+            background-color: #fff9c4; /* 연노랑 디스플레이 */
+            color: #555;
+            font-size: 2.5rem;
+            text-align: right;
+            padding: 0 15px;
+            box-sizing: border-box;
+            border: 2px solid #ffe082;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-family: 'Gaegu', cursive;
+            box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1); /* 안쪽 그림자 */
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px; /* 버튼 간격 */
+        }
+        button {
+            padding: 18px;
+            font-size: 1.8rem;
+            border: none;
+            border-radius: 50%; /* 원형 버튼 */
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            font-family: 'Gaegu', cursive;
+            color: white;
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1); /* 버튼 입체감 */
+        }
+        button:active {
+            transform: translateY(4px); /* 클릭 시 눌리는 효과 */
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 버튼 색상 조합 */
+        /* 숫자 버튼 */
+        button.num {
+            background-color: #4fc3f7; /* 하늘색 */
+        }
+        button.num:hover { background-color: #29b6f6; }
+
+        /* 연산자 버튼 */
+        button.operator {
+            background-color: #ffb74d; /* 주황색 */
+            font-weight: bold;
+        }
+        button.operator:hover { background-color: #ffa726; }
+
+        /* 특수 버튼 (C, =) */
+        button.clear {
+            background-color: #ef5350; /* 빨간색 */
+            grid-column: span 2;
+            border-radius: 30px; /* 긴 알약 모양 */
+        }
+        button.clear:hover { background-color: #e53935; }
+
+        button.equal {
+            background-color: #66bb6a; /* 초록색 */
+            grid-column: span 2;
+            border-radius: 30px; /* 긴 알약 모양 */
+            font-weight: bold;
+        }
+        button.equal:hover { background-color: #43a047; }
+
+        /* 0 버튼 스타일 */
+        button.btn-0 {
+            grid-column: span 2;
+            border-radius: 30px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" id="display" readonly value="0">
+    <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">C (지우기)</button>
+        <button class="operator" onclick="appendValue('/')">÷</button>
+        <button class="operator" onclick="appendValue('*')">×</button>
+        
+        <button class="num" onclick="appendValue('7')">7</button>
+        <button class="num" onclick="appendValue('8')">8</button>
+        <button class="num" onclick="appendValue('9')">9</button>
+        <button class="operator" onclick="appendValue('-')">-</button>
+        
+        <button class="num" onclick="appendValue('4')">4</button>
+        <button class="num" onclick="appendValue('5')">5</button>
+        <button class="num" onclick="appendValue('6')">6</button>
+        <button class="operator" onclick="appendValue('+')">+</button>
+        
+        <button class="num" onclick="appendValue('1')">1</button>
+        <button class="num" onclick="appendValue('2')">2</button>
+        <button class="num" onclick="appendValue('3')">3</button>
+        <button class="num" onclick="appendValue('.')">.</button>
+        
+        <button class="equal" onclick="calculate()">= (결과)</button>
+        <button class="num btn-0" onclick="appendValue('0')">0</button>
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById('display');
+
+    function appendValue(val) {
+        if (display.value === '0' && val !== '.') {
+            display.value = val;
+        } else {
+            display.value += val;
+        }
+    }
+
+    function clearDisplay() {
+        display.value = '0';
+    }
+
+    function calculate() {
+        try {
+            // eval 함수를 안전하게 사용하여 수식 계산
+            let result = eval(display.value.replace(/×/g, '*').replace(/÷/g, '/'));
+            
+            // 결과가 소수일 경우 적당히 반올림하여 표시
+            if (!Number.isInteger(result)) {
+                result = parseFloat(result.toFixed(6));
+            }
+            display.value = result;
+            
+        } catch (error) {
+            display.value = '오류 났다! 힝';
+            setTimeout(clearDisplay, 2000);
+        }
+    }
+</script>
+
+</body>
+</html>
