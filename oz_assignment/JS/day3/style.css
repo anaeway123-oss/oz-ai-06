@@ -1,0 +1,137 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 40px 16px;
+  background: #f4f2ea;
+  font-family: -apple-system, "Malgun Gothic", "Segoe UI", sans-serif;
+  color: #222;
+}
+
+.app {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+}
+
+/* 탭 버튼 */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tab {
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f4f2ea;
+  color: #555;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: #2b3a55;
+  color: #fff;
+  border-color: #2b3a55;
+}
+
+/* 검색창 */
+.search {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.search:focus {
+  outline: none;
+  border-color: #2b3a55;
+}
+
+/* 표 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead th {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 2px solid #eee;
+  color: #888;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+tbody td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.col-star {
+  width: 40px;
+  text-align: center;
+}
+
+.col-symbol {
+  font-weight: 600;
+}
+
+.col-num {
+  text-align: right;
+}
+
+thead .col-num {
+  text-align: right;
+}
+
+.up {
+  color: #d84c3e; /* 상승: 빨강 (국내 관행) */
+}
+
+.down {
+  color: #2f6fd1; /* 하락: 파랑 */
+}
+
+.flat {
+  color: #888;
+}
+
+.star-btn {
+  cursor: pointer;
+  font-size: 16px;
+  background: none;
+  border: none;
+  color: #ccc;
+}
+
+.star-btn.active {
+  color: #f5b400;
+}
+
+.loading,
+.empty {
+  text-align: center;
+  color: #999;
+  padding: 24px 0;
+}
